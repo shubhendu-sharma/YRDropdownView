@@ -9,7 +9,6 @@
 #import "YRDropdownView.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define IS_APP_RUNNING_ON_IOS7_AND_GREATER [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0
 #define STATUS_BAR_HEIGHT [[UIApplication sharedApplication] statusBarFrame].size.height
 
 @interface UILabel (YRDropdownView)
@@ -232,15 +231,7 @@ static YRDropdownView *currentDropdown = nil;
     if (currentDropdown) {
         [currentDropdown hideUsingAnimation:[NSNumber numberWithBool:animated]];
     }
-    YRDropdownView *dropdown;
-    if (IS_APP_RUNNING_ON_IOS7_AND_GREATER) {
-        dropdown = [[YRDropdownView alloc] initWithFrame:CGRectMake(0, view.bounds.origin.y+STATUS_BAR_HEIGHT, view.bounds.size.width, 44)];
-
-    }else
-    {
-        dropdown = [[YRDropdownView alloc] initWithFrame:CGRectMake(0, view.bounds.origin.y, view.bounds.size.width, 44)];
-
-    }
+    YRDropdownView *dropdown = [[YRDropdownView alloc] initWithFrame:CGRectMake(0, view.bounds.origin.y, view.bounds.size.width, 44)];
     currentDropdown = dropdown;
     dropdown.titleText = title;
 
